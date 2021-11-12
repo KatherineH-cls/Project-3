@@ -1,0 +1,47 @@
+-- Create James Bond data Table
+CREATE TABLE james_bond_data (
+	Year INT,
+	Movie TEXT PRIMARY KEY NOT NULL,
+	Actor TEXT,
+	Director TEXT,
+	Composer TEXT,
+	Writer TEXT,
+	Cinematographer TEXT,
+	Film_Location TEXT,
+	Shooting_Location TEXT,
+	Bond_Car TEXT,
+	Bond_Girl_Nat TEXT,
+	US_Grossing FLOAT,
+	US_Gross_adj_2013 FLOAT,
+	US_Gross_adj_2020 FLOAT,
+	World_Gross FLOAT,
+	World_Gross_adj_2013 FLOAT,
+	World_Gross_adj_2020 FLOAT,
+	Budget FLOAT,
+	Budget_adj_2013 FLOAT,	
+	Budget_adj_2020 FLOAT,
+	Film_Length INT,
+	AVG_IMDB_Rating FLOAT,
+	AVG_RTN_Tom_Rating FLOAT,
+	Conquest INT,
+	Martinis INT,
+	BJB INT,
+	Kills_Bond INT,
+	Kills_Others INT,
+	Top_100_soundtrack INT,
+	Video_Game INT
+	);
+
+CREATE TABLE bond_girl_data (
+	bond_girl_name TEXT,
+	actress_age int,
+	film_title text,
+	film_release_year int,
+	bond_actor text,
+	bond_actor_age int,
+	director_name text,
+	box_office_actual_$ float,
+	box_office_adjusted_2005 float,
+	budget_actual_$ float,
+	budget_adjusted_2005 float
+	);
