@@ -104,8 +104,8 @@ function makeResponsive() {
     function updateToolTip(chosenXAxis, chosenYAxis, circlesGroup) {
 
         var xlabel;
-        if (chosenXAxis === "poverty") {
-            xlabel = "Poverty (%):";
+        if (chosenXAxis === "year") {
+            xlabel = "Film Release Year";
         }
         else if (chosenXAxis === "age") {
             xlabel = "Age: ";
@@ -116,8 +116,8 @@ function makeResponsive() {
         else xlabel = "No data";
 
         var ylabel;
-        if (chosenYAxis === "obesity") {
-            ylabel = "Obesity:";
+        if (chosenYAxis === "actress_age") {
+            ylabel = "Age of Bond Girl:";
         }
         else if (chosenYAxis === "smokes") {
             ylabel = "Smokers: ";
@@ -136,7 +136,7 @@ function makeResponsive() {
             .style("border-radius", "5px")
             .style("padding", "10px")
             .html(function (d) {
-                return (`<strong>${d.state}</strong>
+                return (`<strong>${d.girl_name}</strong>
             <br>${xlabel} ${d[chosenXAxis]}
             <br>${ylabel} ${d[chosenYAxis]} %`);
             });
@@ -170,26 +170,25 @@ function makeResponsive() {
     // ==============================
 
     // Initial Params
-    var chosenXAxis = "poverty";
-    var chosenYAxis = "healthcare";
+    var chosenXAxis = "year";
+    var chosenYAxis = "actress_age";
 
     // Load data from data.csv
-    d3.csv("assets/data/data.csv").then(function (data) {
-
+    d3.csv("assets/data/bond_girls.csv").then(function (data) {
+        console.log("you are here")
         // Print the data
+        // if (error) throw error;
         console.log(data);
+        console.log("got past error")
 
         // Step 1: Parse Data/Cast as numbers
         // ==============================
         data.forEach(function (data) {
-            data.poverty = +data.poverty;
-            data.healthcare = +data.healthcare;
-            data.age = +data.age;
-            data.obesity = +data.obesity;
-            data.income = +data.income;
-            data.smokes = +data.smokes;
-            data.stateabbr = data.abbr;
-            data.state = data.state;
+            data.actress_age = +data.actress_age;
+            data.bond_age = +data.bond_age;
+            data.film_release_year = data.year;
+            data.bond_girl_name = data.girl;
+            data.bond_actor = data.bond;
         });
 
         // Step 2: Create scale functions
@@ -220,12 +219,12 @@ function makeResponsive() {
             .attr("transform", `translate(${chartWidth / 2}, ${chartHeight + 20})`)
             ;
 
-        var povertyLabel = xlabelsGroup.append("text")
+        var yearLabel = xlabelsGroup.append("text")
             .attr("x", 0)
             .attr("y", 20)
-            .attr("value", "poverty") // value to grab for event listener
+            .attr("value", "year") // value to grab for event listener
             .classed("active", true)
-            .text("In Poverty (%)");
+            .text("Film Release Year");
 
         var ageLabel = xlabelsGroup.append("text")
             .attr("x", 0)
@@ -248,19 +247,19 @@ function makeResponsive() {
             .attr("x", -chartHeight / 2)
             ;
 
-        var obeseLabel = ylabelsGroup.append("text")
+        var bond_ageLabel = ylabelsGroup.append("text")
             .attr("x", -chartHeight / 2)
             .attr("y", -70)
-            .attr("value", "obesity") // value to grab for event listener
+            .attr("value", "bond_age") // value to grab for event listener
             .classed("inactive", true)
-            .text("Obese (%)");
+            .text("Age of Bond actor");
 
-        var smokesLabel = ylabelsGroup.append("text")
+        var actess_ageLabel = ylabelsGroup.append("text")
             .attr("x", -chartHeight / 2)
             .attr("y", -50)
-            .attr("value", "smokes") // value to grab for event listener
+            .attr("value", "actress_age") // value to grab for event listener
             .classed("inactive", true)
-            .text("Smokes (%)");
+            .text("Age of Bond girl");
 
         var healthcareLabel = ylabelsGroup.append("text")
             .attr("x", -chartHeight / 2)
@@ -276,7 +275,7 @@ function makeResponsive() {
             .attr("y", 0 - (margin.top / 2))
             .attr("text-anchor", "middle")
             .style("font-size", "14px")
-            .text("Relationship between social factors and health outcomes, by State (2014)")
+            .text("Bond Girl")
             ;
 
         // Step 5: Create Circles
@@ -303,7 +302,7 @@ function makeResponsive() {
             .attr("text-anchor", "middle")
             .attr("alignment-baseline", "central")
             .attr("fill", "azure")
-            .text(d => d.stateabbr);
+            .text(d => d.girl);
 
         // updateToolTip function above csv import
         circlesGroup = updateToolTip(chosenXAxis, chosenYAxis, circlesGroup);
@@ -334,8 +333,8 @@ function makeResponsive() {
                     circlesGroup = updateToolTip(chosenXAxis, chosenYAxis, circlesGroup);
 
                     // changes classes to change bold text
-                    if (chosenXAxis === "poverty") {
-                        povertyLabel
+                    if (chosenXAxis === "year") {
+                        yearLabel
                             .classed("active", true)
                             .classed("inactive", false);
                         ageLabel
@@ -346,7 +345,7 @@ function makeResponsive() {
                             .classed("inactive", true);
                     }
                     else if (chosenXAxis === "age") {
-                        povertyLabel
+                        yearLabel
                             .classed("active", false)
                             .classed("inactive", true);
                         ageLabel
@@ -357,7 +356,7 @@ function makeResponsive() {
                             .classed("inactive", true);
                     }
                     else if (chosenXAxis === "income") {
-                        povertyLabel
+                        yearLabel
                             .classed("active", false)
                             .classed("inactive", true);
                         ageLabel
@@ -394,11 +393,11 @@ function makeResponsive() {
                     circlesGroup = updateToolTip(chosenXAxis, chosenYAxis, circlesGroup);
 
                     // changes classes to change bold text
-                    if (chosenYAxis === "obesity") {
-                        obeseLabel
+                    if (chosenYAxis === "bond_age") {
+                        bond_ageLabel
                             .classed("active", true)
                             .classed("inactive", false);
-                        smokesLabel
+                        actess_ageLabel
                             .classed("active", false)
                             .classed("inactive", true);
                         healthcareLabel
@@ -406,10 +405,10 @@ function makeResponsive() {
                             .classed("inactive", true);
                     }
                     else if (chosenYAxis === "smokes") {
-                        obeseLabel
+                        bond_ageLabel
                             .classed("active", false)
                             .classed("inactive", true);
-                        smokesLabel
+                        actress_ageLabel
                             .classed("active", true)
                             .classed("inactive", false);
                         healthcareLabel

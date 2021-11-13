@@ -1,0 +1,72 @@
+actress_age,film_title,bond_actor_age,average_girl_age,year,actor,actress
+26,Dr. No,32,31.0,1962,Sean Connery,Ursula Andress
+36,Dr. No,32,31.0,1962,Sean Connery,Zena Marshall
+35,From Russia with Love,33,26.333333333333332,1963,Sean Connery,Eunice Gayson
+21,From Russia with Love,33,26.333333333333332,1963,Sean Connery,Daniela Bianchi
+23,From Russia with Love,33,26.333333333333332,1963,Sean Connery,Aliza Gur
+24,Thunderball,35,24.2,1965,Sean Connery,Martine Beswick
+24,Thunderball,35,24.2,1965,Sean Connery,Claudine Auger
+28,Thunderball,35,24.2,1965,Sean Connery,Luciana Paluzzi
+23,Thunderball,35,24.2,1965,Sean Connery,Molly Peters
+22,Thunderball,35,24.2,1965,Sean Connery,Maryse Guy Mitsouko
+39,Goldfinger,34,28.6,1964,Sean Connery,Honor Blackman
+27,Goldfinger,34,28.6,1964,Sean Connery,Shirley Eaton
+23,Goldfinger,34,28.6,1964,Sean Connery,Tania Mallet
+33,Goldfinger,34,28.6,1964,Sean Connery,Nadja Regin
+21,Goldfinger,34,28.6,1964,Sean Connery,Margaret Nolan
+24,You Only Live Twice,37,28.0,1967,Sean Connery,Mie Hama
+28,You Only Live Twice,37,28.0,1967,Sean Connery,Akiko Wakabayashi
+31,You Only Live Twice,37,28.0,1967,Sean Connery,Tsai Chin
+29,You Only Live Twice,37,28.0,1967,Sean Connery,Karin Dor
+31,On Her Majesty's Secret Service,30,26.666666666666668,1969,George Lazenby,Diana Rigg
+24,On Her Majesty's Secret Service,30,26.666666666666668,1969,George Lazenby,Angela Scoular
+25,On Her Majesty's Secret Service,30,26.666666666666668,1969,George Lazenby,Catherine Schell
+31,Diamonds Are Forever,41,29.0,1971,Sean Connery,Jill St John
+25,Diamonds Are Forever,41,29.0,1971,Sean Connery,Lana Wood
+24,Diamonds Are Forever,41,29.0,1971,Sean Connery,Trina Parks
+36,Diamonds Are Forever,41,29.0,1971,Sean Connery,Denise Perrier
+22,Live and Let Die,46,23.333333333333332,1973,Roger Moore,Jane Seymour
+24,Live and Let Die,46,23.333333333333332,1973,Roger Moore,Gloria Hendry
+24,Live and Let Die,46,23.333333333333332,1973,Roger Moore,Madeline Smith
+32,The Man with the Golden Gun,47,28.0,1974,Roger Moore,Britt Ekland
+24,The Man with the Golden Gun,47,28.0,1974,Roger Moore,Carmen du Sautoy
+38,Octopussy,56,35.5,1983,Roger Moore,Maud Adams
+33,Octopussy,56,35.5,1983,Roger Moore,Kristina Wayborn
+30,The Spy Who Loved Me,50,30.333333333333332,1977,Roger Moore,Barbara Bach
+28,The Spy Who Loved Me,50,30.333333333333332,1977,Roger Moore,Caroline Munro
+33,The Spy Who Loved Me,50,30.333333333333332,1977,Roger Moore,Olga Bisera
+32,Moonraker,52,29.666666666666668,1979,Roger Moore,Lois Chiles
+29,Moonraker,52,29.666666666666668,1979,Roger Moore,Corinne Cléry
+28,Moonraker,52,29.666666666666668,1979,Roger Moore,Emily Bolton
+24,For Your Eyes Only,54,26.666666666666668,1981,Roger Moore,Carole Bouquet
+23,For Your Eyes Only,54,26.666666666666668,1981,Roger Moore,Lynn Holly Johnson
+33,For Your Eyes Only,54,26.666666666666668,1981,Roger Moore,Cassandra Harris
+30,A View to a Kill,58,32.0,1985,Roger Moore,Tanya Roberts
+37,A View to a Kill,58,32.0,1985,Roger Moore,Grace Jones
+29,A View to a Kill,58,32.0,1985,Roger Moore,Fiona Fullerton
+27,The Living Daylights,41,27.0,1987,Timothy Dalton,Maryam d'Abo
+28,Licence to Kill,43,25.0,1989,Timothy Dalton,Carey Lowell
+22,Licence to Kill,43,25.0,1989,Timothy Dalton,Talisa Soto
+25,GoldenEye,42,29.333333333333332,1995,Pierce Brosnan,Izabella Scorupco
+31,GoldenEye,42,29.333333333333332,1995,Pierce Brosnan,Famke Janssen
+32,GoldenEye,42,29.333333333333332,1995,Pierce Brosnan,Serena Gordon
+35,Tomorrow Never Dies,44,30.333333333333332,1997,Pierce Brosnan,Michelle Yeoh
+33,Tomorrow Never Dies,44,30.333333333333332,1997,Pierce Brosnan,Teri Hatcher
+23,Tomorrow Never Dies,44,30.333333333333332,1997,Pierce Brosnan,Cecilie Thomsen
+28,The World Is Not Enough,46,33.0,1999,Pierce Brosnan,Denise Richards
+33,The World Is Not Enough,46,33.0,1999,Pierce Brosnan,Sophie Marceau
+38,The World Is Not Enough,46,33.0,1999,Pierce Brosnan,Serena Scott Thomas
+36,Die Another Day,49,28.0,2002,Pierce Brosnan,Halle Berry
+23,Die Another Day,49,28.0,2002,Pierce Brosnan,Rosamund Pike
+25,Die Another Day,49,28.0,2002,Pierce Brosnan,Rachel Grant
+26,Casino Royale,38,27.5,2006,Daniel Craig,Eva Green
+29,Casino Royale,38,27.5,2006,Daniel Craig,Catherina Murino
+29,Quantum of Solace,40,25.5,2008,Daniel Craig,Olga Kurylenko
+22,Quantum of Solace,40,25.5,2008,Daniel Craig,Gemma Arterton
+33,Skyfall,44,29.0,2012,Daniel Craig,Bérénice Marlohe
+25,Skyfall,44,29.0,2012,Daniel Craig,Tonia Sotiropoulou
+51,Spectre,47,40.5,2015,Daniel Craig,Monica Bellucci
+30,Spectre,47,40.5,2015,Daniel Craig,Léa Seydoux
+36,No Time to Die,53,34.333333333333336,2021,Daniel Craig,Léa Seydoux
+34,No Time to Die,53,34.333333333333336,2021,Daniel Craig,Lashan Lynch
+33,No Time to Die,53,34.333333333333336,2021,Daniel Craig,Ana de Armas
