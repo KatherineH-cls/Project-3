@@ -195,6 +195,8 @@ function makeResponsive() {
             .domain([0, 70])
             .range([chartHeight, 0]);
 
+            console.log(yScale(70-33));
+
 
         // Step 3: Create axis functions
         // ==============================
@@ -249,6 +251,7 @@ function makeResponsive() {
             .attr("y", -50)
             .attr("value", "actress_age") // value to grab for event listener
             .classed("inactive", true)
+            .attr("fill", "#f55f1f")
             .text("Age of Bond girl");
 
         var averageLabel = ylabelsGroup.append("text")
@@ -256,6 +259,7 @@ function makeResponsive() {
             .attr("y", -30)
             .attr("value", "average_girl_age") // value to grab for event listener
             .classed("active", true)
+            .attr("fill", "#f55f1f")
             .text("Average age of Bond girl");
 
 
@@ -266,7 +270,7 @@ function makeResponsive() {
             .attr("value", "bond_actor_age") // value to grab for event listener
             .classed("inactive", true)
             .text("Age of Bond actor")
-            .style('fill', 'red')
+            .style('fill', "#0064d8")
             ;
 
 
@@ -282,6 +286,21 @@ function makeResponsive() {
 
         console.log("title added");
 
+        //add box for 25 percentile to 75 percentile
+        chartGroup.selectAll(".spread")
+            .data(data)
+            .enter()
+            .append("rect")
+            .attr('x', 0)
+            .attr('y', yScale(33))
+            .attr('width', chartWidth)
+            .attr('height',yScale(70-9))
+            // .attr('height', function(d){return(y(d.actress_age.q1)-y(d.actress_age.q3))})
+            .attr('stroke', '#dddddd')
+            .attr('fill', '#fadacd')
+            .attr("opacity", ".2")
+            ;
+
         // Step 5: Create Circles
         // ==============================
         console.log(chosenXAxis);
@@ -293,11 +312,23 @@ function makeResponsive() {
             .attr("cx", d => xScale(d[chosenXAxis]))
             .attr("cy", d => yScale(d[chosenYAxis]))
             .attr("r", "8")
-            .attr("fill", "lightseagreen")
-            .attr("opacity", ".5")
+            .attr("fill", "#f55f1f")
+            .attr("opacity", ".6")
             ;
 
         // add separate data for bond
+        // Color scale: give me a specie name, I return a color
+        var color = d3.scaleOrdinal()
+            .domain(['Sean Connery', 'George Lazenby', 'Roger Moore', 'Timothy Dalton',
+                'Pierce Brosnan', 'Daniel Craig'])
+            .range([
+                "#002445",
+                "#003468",
+                "#00448c",
+                "#0054b1",
+                "#0064d8",
+                "#0073ff"])
+
         var bondGroup = chartGroup.selectAll(".bond")
             .data(data)
             .enter()
@@ -305,7 +336,7 @@ function makeResponsive() {
             .attr("cx", d => xScale(d[chosenXAxis]))
             .attr("cy", d => yScale(d['bond_actor_age']))
             .attr("r", "8")
-            .attr("fill", "red")
+            .attr("fill", function (d) { return color(d.actor) })
             .attr("opacity", ".5")
 
         console.log("circles added");
@@ -322,6 +353,8 @@ function makeResponsive() {
         //     .attr("alignment-baseline", "central")
         //     .attr("fill", "azure")
         //     .text(d => d.girl);
+
+        
 
         // updateToolTip function above csv import
         // circlesGroup = updateToolTip(chosenXAxis, chosenYAxis, circlesGroup);
