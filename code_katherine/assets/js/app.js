@@ -53,86 +53,49 @@ function makeResponsive() {
 
         return circlesGroup;
     }
-    // function used for updating circles text location when circles move
-    // function renderText(circlesText,
-    //     xScale, chosenXAxis,
-    //     yScale, chosenYAxis) {
 
-    //     circlesText.transition()
-    //         .duration(1000)
-    //         .attr("x", d => xScale(d[chosenXAxis]))
-    //         .attr("y", d => yScale(d[chosenYAxis]));
-
-    //     return circlesText;
-    // }
 
     // function used for updating circles group with new tooltip
     function updateToolTip(chosenYAxis, circlesGroup) {
-
-        // var xlabel;
-        // if (chosenXAxis === "year") {
-        //     xlabel = "Film Release Year";
-        // }
-        // else if (chosenXAxis === "age") {
-        //     xlabel = "Age: ";
-        // }
-        // else if (chosenXAxis === "income") {
-        //     xlabel = "Income: ";
-        // }
-        // else xlabel = "No data";
-
-        var ylabel;
-        if (chosenYAxis === "actress_age") {
-            ylabel = "one";
-        }
-        else if (chosenYAxis === "average_girl_age") {
-            ylabel = "two";
-        }
-        else if (chosenYAxis === "bond_actor_age") {
-            ylabel = "three";
-        }
-        else ylabel = "no data";
-        console.log(chosenYAxis);
-        console.log(ylabel);
-
-        console.log("before tooltip");
-
         var toolTip = d3.tip()
-            .attr("class", "tooltip")
             .offset([-10, -60])
-            // .style("background-color", "white")
-            // .style("border", "solid")
-            // .style("border-width", "1px")
-            // .style("border-radius", "5px")
-            // .style("padding", "10px")
+            .style("background-color", "white")
+            .style("border", "solid")
+            .style("border-width", "1px")
+            .style("border-radius", "5px")
+            .style("padding", "10px")
+            .style("fill", "black")
             .html(function (d) {
-                // console.log("inside tool tip");
-                return (d.year);
+                var tipText
+                if (chosenYAxis === "actress_age") {
+                    tipText = `<strong>${d.film_title}</strong>
+                    <br>${d.actress}
+                    <br>Age: ${d.actress_age}`;
+                }
+                else if (chosenYAxis === "average_girl_age") {
+                    tipText = `<strong>${d.actor}</strong>
+                    <br>Age difference: ${d.difference}`;
+                }
+                console.log("inside tool tip");
+                console.log(d.year);
+                return tipText;
             });
 
-        console.log("after tooltip");
-
-        // return (`<strong>${d.year}</strong>
-        // <br>${ylabel} ${d[chosenYAxis]} %`);
-        // });
-
-
-
-        console.log("toolTip");
 
         circlesGroup.call(toolTip);
 
-        console.log("toolTip2");
+
 
         circlesGroup.on("mouseover", function (data) {
             toolTip.show(data);
+            // mouseover;
             console.log("mouseover");
             d3.select(this)
                 .transition()
                 .duration(300)
-                .attr("fill", "teal")
-                .attr("r", "15")
-                .style("stroke", "black");
+            // .attr("fill", "teal")
+            // .attr("r", "15")
+            // .style("stroke", "black");
         })
             // onmouseout event
             .on("mouseout", function (data) {
@@ -140,12 +103,60 @@ function makeResponsive() {
                 d3.select(this)
                     .transition()
                     .duration(300)
-                    .attr("fill", "lightseagreen")
-                    .attr("r", "10")
-                    .style("stroke", "none");
+                // .attr("fill", "lightseagreen")
+                // .attr("r", "10")
+                // .style("stroke", "none");
             });
 
         return circlesGroup;
+    }
+
+     // function used for updating bond group with new tooltip
+     function updateBondTip(chosenYAxis, bondGroup) {
+        var bondTip = d3.tip()
+            .offset([-10, -60])
+            .style("background-color", "white")
+            .style("border", "solid")
+            .style("border-width", "1px")
+            .style("border-radius", "5px")
+            .style("padding", "10px")
+            .style("fill", "black")
+            .html(function (d) {
+                var tipText
+                tipText = `<strong>${d.film_title}</strong>
+                    <br>${d.actor}
+                    <br>Age: ${d.bond_actor_age}`;
+                return tipText;
+            });
+
+
+        bondGroup.call(bondTip);
+
+
+
+        bondGroup.on("mouseover", function (data) {
+            bondTip.show(data);
+            // mouseover;
+            console.log("mouseover");
+            d3.select(this)
+                .transition()
+                .duration(300)
+            // .attr("fill", "teal")
+            // .attr("r", "15")
+            // .style("stroke", "black");
+        })
+            // onmouseout event
+            .on("mouseout", function (data) {
+                bondTip.hide(data);
+                d3.select(this)
+                    .transition()
+                    .duration(300)
+                // .attr("fill", "lightseagreen")
+                // .attr("r", "10")
+                // .style("stroke", "none");
+            });
+
+        return bondGroup;
     }
 
     // Fetch data and draw the graph
@@ -195,7 +206,7 @@ function makeResponsive() {
             .domain([0, 70])
             .range([chartHeight, 0]);
 
-            console.log(yScale(70-33));
+        console.log(yScale(70 - 33));
 
 
         // Step 3: Create axis functions
@@ -237,14 +248,7 @@ function makeResponsive() {
             .attr("x", -chartHeight / 2)
             ;
 
-        // var bond_ageLabel = ylabelsGroup.append("text")
-        //     .attr("x", -chartHeight / 2)
-        //     .attr("y", -70)
-        //     // .attr("value", "bond_actor_age") // value to grab for event listener
-        //     // .classed("inactive", true)
-        //     .text("Age of Bond actor")
-        //     .style('fill', 'red')
-        //     ;
+
 
         var actress_ageLabel = ylabelsGroup.append("text")
             .attr("x", -chartHeight / 2)
@@ -287,6 +291,7 @@ function makeResponsive() {
         console.log("title added");
 
         //add box for 25 percentile to 75 percentile
+        // ==============================
         chartGroup.selectAll(".spread")
             .data(data)
             .enter()
@@ -294,7 +299,7 @@ function makeResponsive() {
             .attr('x', 0)
             .attr('y', yScale(33))
             .attr('width', chartWidth)
-            .attr('height',yScale(70-9))
+            .attr('height', yScale(70 - 9))
             // .attr('height', function(d){return(y(d.actress_age.q1)-y(d.actress_age.q3))})
             .attr('stroke', '#dddddd')
             .attr('fill', '#fadacd')
@@ -305,10 +310,15 @@ function makeResponsive() {
         // ==============================
         console.log(chosenXAxis);
         console.log(chosenYAxis);
-        var circlesGroup = chartGroup.selectAll("circle")
+        var circlesGroup = chartGroup.selectAll("girls")
             .data(data)
             .enter()
             .append("circle")
+            // .attr("value", function (d) {
+            //     // console.log("assigning value");
+            //     // console.log(d.actor);
+            //     return d.year
+            // })
             .attr("cx", d => xScale(d[chosenXAxis]))
             .attr("cy", d => yScale(d[chosenYAxis]))
             .attr("r", "8")
@@ -316,7 +326,8 @@ function makeResponsive() {
             .attr("opacity", ".6")
             ;
 
-        // add separate data for bond
+        // add separate circles for Bond
+        // ==============================
         // Color scale: give me a specie name, I return a color
         var color = d3.scaleOrdinal()
             .domain(['Sean Connery', 'George Lazenby', 'Roger Moore', 'Timothy Dalton',
@@ -329,41 +340,54 @@ function makeResponsive() {
                 "#0064d8",
                 "#0073ff"])
 
-        var bondGroup = chartGroup.selectAll(".bond")
+        var bondGroup = chartGroup.selectAll("bond")
             .data(data)
             .enter()
             .append("circle")
+            .attr("value", function (d) {
+                // console.log("assigning value");
+                // console.log(d.actor);
+                return d.actor
+            })
+            .attr("class", "bond")
+            // .attr("class", function (d) { 
+            //     console.log(`"${d.actor}"`);
+            //     return `"${d.actor}"`})
             .attr("cx", d => xScale(d[chosenXAxis]))
             .attr("cy", d => yScale(d['bond_actor_age']))
             .attr("r", "8")
             .attr("fill", function (d) { return color(d.actor) })
             .attr("opacity", ".5")
+        // .on("mouseover", highlight)
+        // .on("mouseleave", doNotHighlight)
 
-        console.log("circles added");
-
-        // // add state labels to circles
-        // var circlesText = chartGroup.selectAll(".st_label")
-        //     .data(data)
-        //     .enter()
-        //     .append("text")
-        //     .style("font-size", "10px")
-        //     .attr("x", d => xScale(d[chosenXAxis]))
-        //     .attr("y", d => yScale(d[chosenYAxis]))
-        //     .attr("text-anchor", "middle")
-        //     .attr("alignment-baseline", "central")
-        //     .attr("fill", "azure")
-        //     .text(d => d.girl);
-
-        
-
-        // updateToolTip function above csv import
-        // circlesGroup = updateToolTip(chosenXAxis, chosenYAxis, circlesGroup);
-        // circlesGroup = updateToolTip(chosenYAxis, circlesGroup);
+        // Activate tooltips
+        // ==============================
+        circlesGroup = updateToolTip(chosenYAxis, circlesGroup);
+        bondGroup = updateBondTip(chosenYAxis, bondGroup);
         console.log("tooltips updated");
 
         // Step 6: Add event listeners
         // ==============================
 
+        // function highlight(value_test) {
+        //     d3.selectAll(".bond")
+        //     .style("fill", function (d){
+        //         if d.actor === value_test
+        //         return "red"
+        //         else return "green"
+        //     })
+        // }
+
+        // bond event listener
+        chartGroup.selectAll(".bond")
+            .on("click", function () {
+                console.log("get ready");
+                var value = d3.select(this).attr("value");
+                console.log("I am clicking");
+                console.log(value);
+                // highlight(value);
+            })
 
 
         // y axis labels event listener
@@ -393,20 +417,10 @@ function makeResponsive() {
                     //     xScale, chosenXAxis,
                     //     yScale, chosenYAxis);
                     // updates tooltips with new info
-                    // circlesGroup = updateToolTip(chosenYAxis, circlesGroup);
+                    circlesGroup = updateToolTip(chosenYAxis, circlesGroup);
 
                     // changes classes to change bold text
-                    // if (chosenYAxis === "bond_actor_age") {
-                    //     bond_ageLabel
-                    //         .classed("active", true)
-                    //         .classed("inactive", false);
-                    //     actess_ageLabel
-                    //         .classed("active", false)
-                    //         .classed("inactive", true);
-                    //     averageLabel
-                    //         .classed("active", false)
-                    //         .classed("inactive", true);
-                    // }
+
                     if (chosenYAxis === "actress_age") {
                         // bond_ageLabel
                         //     .classed("active", false)
@@ -443,3 +457,212 @@ makeResponsive();
 // Event listener for window resize.
 // When the browser window is resized, makeResponsive() is called.
 d3.select(window).on("resize", makeResponsive);
+
+// var xlabel;
+// if (chosenXAxis === "year") {
+//     xlabel = "Film Release Year";
+// }
+// else if (chosenXAxis === "age") {
+//     xlabel = "Age: ";
+// }
+// else if (chosenXAxis === "income") {
+//     xlabel = "Income: ";
+// }
+// else xlabel = "No data";
+
+// var ylabel;
+// if (chosenYAxis === "actress_age") {
+//     ylabel = "one";
+// }
+// else if (chosenYAxis === "average_girl_age") {
+//     ylabel = "two";
+// }
+// else if (chosenYAxis === "bond_actor_age") {
+//     ylabel = "three";
+// }
+// else ylabel = "no data";
+// console.log(chosenYAxis);
+// console.log(ylabel);
+
+// function used for updating circles text location when circles move
+// function renderText(circlesText,
+//     xScale, chosenXAxis,
+//     yScale, chosenYAxis) {
+
+//     circlesText.transition()
+//         .duration(1000)
+//         .attr("x", d => xScale(d[chosenXAxis]))
+//         .attr("y", d => yScale(d[chosenYAxis]));
+
+//     return circlesText;
+// }
+// create a tooltip
+// var toolTip = d3.select("circle")
+//     .append("div")
+//     .style("opacity", 0)
+//     .attr("class", "tooltip")
+//     .style("background-color", "white")
+//     .style("border", "solid")
+//     .style("border-width", "2px")
+//     .style("border-radius", "5px")
+//     .style("padding", "5px")
+//     .text("this is a tooltip")
+
+// console.log("after tooltip");
+
+// circlesGroup.on("mouseover", function (data) {
+//     toolTip.show(data);
+//     d3.select(this)
+//         .transition()
+//         .duration(300)
+//         // .attr("fill", "teal")
+//         // .attr("r", "15")
+//         // .style("stroke", "black");
+// })
+
+// var toolTip = d3.tip()
+// .attr("class", "tooltip")
+// .offset([-10, -60])
+// .style("background-color", "white")
+// .style("border", "solid")
+// .style("border-width", "1px")
+// .style("border-radius", "5px")
+// .style("padding", "10px")
+// .html(function (d) {
+//     return (`<strong>${d.year}</strong>
+// <br>${ylabel} ${d[chosenYAxis]}
+// <br>${ylabel} ${d[chosenYAxis]} %`);
+// })
+// ;
+
+
+// Three function that change the tooltip when user hover / move / leave a cell
+// var mouseover = function (d) {
+//     toolTip
+//         .style("opacity", 1)
+//     d3.select(this)
+//         .style("stroke", "black")
+//         .style("opacity", 1)
+// }
+// var mousemove = function (d) {
+//     toolTip
+//         .html("The exact value of<br>this cell is: " + d.year)
+//         .style("left", (d3.mouse(this)[0] + 70) + "px")
+//         .style("top", (d3.mouse(this)[1]) + "px")
+// }
+// var mouseleave = function (d) {
+//     toolTip
+//         .style("opacity", 0)
+//     d3.select(this)
+//         .style("stroke", "none")
+//         .style("opacity", 0.8)
+// }
+
+// return (`<strong>${d.year}</strong>
+// <br>${ylabel} ${d[chosenYAxis]} %`);
+// });
+
+
+
+// console.log("toolTip");
+
+// circlesGroup.call(toolTip);
+
+// console.log("toolTip2");
+
+// if (chosenYAxis === "bond_actor_age") {
+//     bond_ageLabel
+//         .classed("active", true)
+//         .classed("inactive", false);
+//     actess_ageLabel
+//         .classed("active", false)
+//         .classed("inactive", true);
+//     averageLabel
+//         .classed("active", false)
+//         .classed("inactive", true);
+// }
+
+// var bond_ageLabel = ylabelsGroup.append("text")
+//     .attr("x", -chartHeight / 2)
+//     .attr("y", -70)
+//     // .attr("value", "bond_actor_age") // value to grab for event listener
+//     // .classed("inactive", true)
+//     .text("Age of Bond actor")
+//     .style('fill', 'red')
+//     ;
+
+console.log("circles added");
+
+        // // add state labels to circles
+        // var circlesText = chartGroup.selectAll(".st_label")
+        //     .data(data)
+        //     .enter()
+        //     .append("text")
+        //     .style("font-size", "10px")
+        //     .attr("x", d => xScale(d[chosenXAxis]))
+        //     .attr("y", d => yScale(d[chosenYAxis]))
+        //     .attr("text-anchor", "middle")
+        //     .attr("alignment-baseline", "central")
+        //     .attr("fill", "azure")
+        //     .text(d => d.girl);
+
+        // /* Initialize tooltip */
+        // tip = d3.tip().attr('class', 'd3-tip').html(function(d) { return d; });
+
+        // /* Invoke the tip in the context of your visualization */
+        // chartGroup.call(tip)
+
+        // chartGroup.selectAll('circle')
+        //   .data(data)
+        //   .enter()
+        //   .append('rect')
+        //   .attr('width', function() { return x.rangeBand() })
+        //   .attr('height', function(d) { return h - y(d) })
+        //   .attr('y', function(d) { return y(d) })
+        //   .attr('x', function(d, i) { return x(i) })
+        //   .on('mouseover', tip.show)
+        //   .on('mouseout', tip.hide)
+
+        // updateToolTip function above csv import
+        // circlesGroup = updateToolTip(chosenXAxis, chosenYAxis, circlesGroup);
+//         d3.select("#div_template")
+        // .selectAll("div")
+        //   .data(data)
+        // .enter().append("div")
+        //   .style("width", function(d) { return x(d) + "px"; })
+        //   .text(function(d) { return d; })
+        //   .on("mouseover", function(d){tooltip.text(d); return tooltip.style("visibility", "visible");})
+        //     .on("mousemove", function(){return tooltip.style("top", (d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px");})
+        //     .on("mouseout", function(){return tooltip.style("visibility", "hidden");});
+
+        //     console.log("after mouse events");
+
+        // Highlight the specie that is hovered
+        // var highlight = function (d) {
+
+        //     selected_actor = d.actor
+        //     console.log("went to highlight");
+        //     console.log(d.actor);
+
+        //     d3.selectAll(".dot")
+        //         .transition()
+        //         .duration(200)
+        //         .style("fill", "lightgrey")
+        //         .attr("r", 3)
+
+        //     d3.selectAll("dot " + d.actor)
+        //         .transition()
+        //         .duration(200)
+        //         .style("fill", color(selected_actor))
+        //         .attr("r", 7)
+        // }
+
+        // Highlight the specie that is hovered
+        // var doNotHighlight = function () {
+        //     d3.selectAll(".dot")
+        //         .transition()
+        //         .duration(200)
+        //         .attr("r", "8")
+        //     .style("fill", function (d) { return color(d.actor) })
+        //     .attr("opacity", ".5")
+        // }
