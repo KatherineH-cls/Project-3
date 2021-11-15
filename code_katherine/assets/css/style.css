@@ -1,3 +1,6 @@
+/* Main html adjustments */
+
+/* Carousel */
 body{
   background-color: #f1f6ff;
 }
@@ -51,7 +54,7 @@ body{
     font-size:25px;
 }
 .col-md-12 {
-    max-height: 80px;
+    max-height: 400px;
 }
 .owl-controls .owl-buttons{
     text-align:center;
