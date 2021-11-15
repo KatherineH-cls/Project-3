@@ -92,20 +92,15 @@ function makeResponsive() {
             console.log("mouseover");
             d3.select(this)
                 .transition()
-                .duration(300)
-            // .attr("fill", "teal")
-            // .attr("r", "15")
-            // .style("stroke", "black");
-        })
+                .duration(300);
+                    })
             // onmouseout event
             .on("mouseout", function (data) {
                 toolTip.hide(data);
                 d3.select(this)
                     .transition()
                     .duration(300)
-                // .attr("fill", "lightseagreen")
-                // .attr("r", "10")
-                // .style("stroke", "none");
+                ;
             });
 
         return circlesGroup;
