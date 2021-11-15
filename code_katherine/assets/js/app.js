@@ -93,14 +93,14 @@ function makeResponsive() {
             d3.select(this)
                 .transition()
                 .duration(300);
-                    })
+        })
             // onmouseout event
             .on("mouseout", function (data) {
                 toolTip.hide(data);
                 d3.select(this)
                     .transition()
                     .duration(300)
-                ;
+                    ;
             });
 
         return circlesGroup;
@@ -146,8 +146,8 @@ function makeResponsive() {
     console.log(chosenYAxis);
 
     // Load data from data.csv
-    d3.csv("assets/data/bond_girls.csv").then(function (data) {
-        console.log("you are here")
+    d3.csv("james-bond-uwa-db.cbbzivxykkl5.ap-southeast-2.rds.amazonaws.com/bond_girls.csv").then(function (data) {
+    // d3.csv("assets/data/bond_girls.csv").then(function (data) {
         // Print the data
         // if (error) throw error;
         console.log(data);
@@ -278,13 +278,13 @@ function makeResponsive() {
             .attr("opacity", ".2")
             ;
 
-            chartGroup
+        chartGroup
             .append("text")
-            .attr('x', xScale(2025))
+            .attr('x', xScale(2017))
             .attr('y', yScale(26))
             .style("font-size", "14px")
             .style("fill", "#f78c60")
-            .text("IQR")
+            .text("middle 50% of ages")
             ;
 
         // Step 5: Create Circles
@@ -295,6 +295,7 @@ function makeResponsive() {
             .data(data)
             .enter()
             .append("circle")
+            .attr("class", "girls")
             .attr("cx", d => xScale(d[chosenXAxis]))
             .attr("cy", d => yScale(d[chosenYAxis]))
             .attr("r", "8")
@@ -360,64 +361,75 @@ function makeResponsive() {
                     .duration(200)
                     .style("fill", "lightgrey")
                     ;
-            })
+            });
+// return colour to greyed circles when girls are clicked
+        chartGroup.selectAll(".girls")
+            .on("click", function () {
+                console.log("click girls");
+                d3.selectAll(".bond")
+                    .data(data)
+                    .transition()
+                    .duration(200)
+                    .style("fill", function (d) { return color(d.actor) })
+                    ;
+            });
 
-            // y axis labels event listener
-            ylabelsGroup.selectAll("text")
-                .on("click", function () {
-                    // get value of selection
-                    var value = d3.select(this).attr("value");
-                    console.log(value);
-                    if (value !== chosenYAxis && value !== "bond_actor_age") {
-                        // replaces chosenYAxis with value
-                        chosenYAxis = value;
-                        console.log(chosenYAxis);
-                        // updates circles with new x, y values
-                        circlesGroup = renderCircles(circlesGroup,
-                            xScale, chosenXAxis,
-                            yScale, chosenYAxis);
-                        // circlesText = renderText(circlesText,
-                        //     xScale, chosenXAxis,
-                        //     yScale, chosenYAxis);
-                        // updates tooltips with new info
-                        circlesGroup = updateToolTip(chosenYAxis, circlesGroup);
+        // y axis labels event listener
+        ylabelsGroup.selectAll("text")
+            .on("click", function () {
+                // get value of selection
+                var value = d3.select(this).attr("value");
+                console.log(value);
+                if (value !== chosenYAxis && value !== "bond_actor_age") {
+                    // replaces chosenYAxis with value
+                    chosenYAxis = value;
+                    console.log(chosenYAxis);
+                    // updates circles with new x, y values
+                    circlesGroup = renderCircles(circlesGroup,
+                        xScale, chosenXAxis,
+                        yScale, chosenYAxis);
+                    // circlesText = renderText(circlesText,
+                    //     xScale, chosenXAxis,
+                    //     yScale, chosenYAxis);
+                    // updates tooltips with new info
+                    circlesGroup = updateToolTip(chosenYAxis, circlesGroup);
 
-                        // changes classes to change bold text
+                    // changes classes to change bold text
 
-                        if (chosenYAxis === "actress_age") {
-                            // bond_ageLabel
-                            //     .classed("active", false)
-                            //     .classed("inactive", true);
-                            actress_ageLabel
-                                .classed("active", true)
-                                .classed("inactive", false);
-                            averageLabel
-                                .classed("active", false)
-                                .classed("inactive", true);
-                        }
-                        else if (chosenYAxis === "average_girl_age") {
-                            // bond_ageLabel
-                            //     .classed("active", false)
-                            //     .classed("inactive", true);
-                            actress_ageLabel
-                                .classed("active", false)
-                                .classed("inactive", true);
-                            averageLabel
-                                .classed("active", true)
-                                .classed("inactive", false);
-                        }
+                    if (chosenYAxis === "actress_age") {
+                        // bond_ageLabel
+                        //     .classed("active", false)
+                        //     .classed("inactive", true);
+                        actress_ageLabel
+                            .classed("active", true)
+                            .classed("inactive", false);
+                        averageLabel
+                            .classed("active", false)
+                            .classed("inactive", true);
                     }
-                });
+                    else if (chosenYAxis === "average_girl_age") {
+                        // bond_ageLabel
+                        //     .classed("active", false)
+                        //     .classed("inactive", true);
+                        actress_ageLabel
+                            .classed("active", false)
+                            .classed("inactive", true);
+                        averageLabel
+                            .classed("active", true)
+                            .classed("inactive", false);
+                    }
+                }
+            });
 
-        }).catch(function (error) {
-            console.log(error);
-        });
+    }).catch(function (error) {
+        console.log(error);
+    });
 
-    }
+}
 
 makeResponsive();
 
-    // Event listener for window resize.
-    // When the browser window is resized, makeResponsive() is called.
-    d3.select(window).on("resize", makeResponsive);
+// Event listener for window resize.
+// When the browser window is resized, makeResponsive() is called.
+d3.select(window).on("resize", makeResponsive);
 
