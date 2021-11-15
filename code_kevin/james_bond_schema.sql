@@ -45,3 +45,14 @@ CREATE TABLE bond_girl_data (
 	budget_actual_$ float,
 	budget_adjusted_2005 float
 	);
+
+CREATE TABLE bond_girl_data_cleaned (
+	actress_age int,
+	film_title text,
+	bond_actor_age int,
+	average_bond_girl_age float,
+	film_release_year int,
+	bond_actor text,
+	bond_actress TEXT,
+	'difference' float
+	);
