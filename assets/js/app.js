@@ -146,10 +146,12 @@ function makeResponsive() {
     console.log(chosenYAxis);
 
     // Load data from data.csv
-    d3.csv("james-bond-uwa-db.cbbzivxykkl5.ap-southeast-2.rds.amazonaws.com/bond_girls.csv").then(function (data) {
+    d3.json("assets/data/bond_girl.json").then(function (data) {
+    
     // d3.csv("assets/data/bond_girls.csv").then(function (data) {
         // Print the data
         // if (error) throw error;
+        
         console.log(data);
 
         console.log("got past error")
@@ -166,6 +168,17 @@ function makeResponsive() {
             data.difference = +data.difference;
             data.diff_avg = +data.diff_avg;
         });
+
+        // // data.forEach(function (data) {
+        //     data.actress_age = +data.actress_age;
+        //     data.bond_actor_age = +data.bond_actor_age;
+        //     data.year = +data.year;
+        //     data.actress = data.actress;
+        //     data.actor = data.actor;
+        //     data.average_girl_age = +data.average_girl_age;
+        //     data.difference = +data.difference;
+        //     data.diff_avg = +data.diff_avg;
+        // // });
 
         // Step 2: Create scale functions
         // ==============================
