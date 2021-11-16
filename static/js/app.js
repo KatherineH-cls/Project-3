@@ -158,27 +158,27 @@ function makeResponsive() {
 
         // Step 1: Parse Data/Cast as numbers
         // ==============================
-        // data.forEach(function (data) {
-        //     data.actress_age = +data.actress_age;
-        //     data.bond_actor_age = +data.bond_actor_age;
-        //     data.year = +data.year;
-        //     data.actress = data.actress;
-        //     data.actor = data.actor;
-        //     data.average_girl_age = +data.average_girl_age;
-        //     data.difference = +data.difference;
-        //     data.diff_avg = +data.diff_avg;
-        // });
-
         data.forEach(function (data) {
             data.actress_age = +data.actress_age;
             data.bond_actor_age = +data.bond_actor_age;
-            data.year = +data.film_release_year;
-            data.actress = data.bond_actress;
-            data.actor = data.bond_actor;
-            data.average_girl_age = +data.average_bond_girl_age;
+            data.year = +data.year;
+            data.actress = data.actress;
+            data.actor = data.actor;
+            data.average_girl_age = +data.average_girl_age;
             data.difference = +data.difference;
             data.diff_avg = +data.diff_avg;
         });
+
+        // data.forEach(function (data) {
+        //     data.actress_age = +data.actress_age;
+        //     data.bond_actor_age = +data.bond_actor_age;
+        //     data.year = +data.film_release_year;
+        //     data.actress = data.bond_actress;
+        //     data.actor = data.bond_actor;
+        //     data.average_girl_age = +data.average_bond_girl_age;
+        //     data.difference = +data.difference;
+        //     data.diff_avg = +data.diff_avg;
+        // });
 
 
         // Step 2: Create scale functions
