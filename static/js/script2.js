@@ -2,7 +2,7 @@
 // Poll JS
 const pollData = [
   {
-    option: "Cillian Murphy",
+    option: "Richard Madden",
     votes: 0,
     color: "rgb(255, 99, 132)"
   },
@@ -12,7 +12,7 @@ const pollData = [
     color: "rgb(54, 162, 235)"
   },
   {
-    option: "Clive standen",
+    option: "Lashana Lynch",
     votes: 0,
     color: "rgb(36, 36, 36)"
   },
