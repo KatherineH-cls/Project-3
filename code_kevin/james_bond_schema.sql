@@ -56,3 +56,13 @@ CREATE TABLE bond_girl_data_cleaned (
 	bond_actress TEXT,
 	'difference' float
 	);
+
+CREATE TABLE country_revenue (
+	country TEXT,
+	release_date TEXT,
+	opening_revenue FLOAT,
+	opening_adj_2020 FLOAT,
+	gross_revenue FLOAT,
+	gross_adj_2020 FLOAT,
+	movie text
+	);
