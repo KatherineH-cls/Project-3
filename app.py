@@ -45,7 +45,7 @@ def girl_bond():
 
     #extract the sql table and turn it into a dataframe
     session=Session(engine)
-    bond_girl=pd.read_sql_table("bond_girl_data_cleaned", conn)
+    bond_girl=pd.read_sql_table("bond_girl_data_cleaned_v2", conn)
     bond_girl_json = bond_girl.to_json(orient = "records")
     session.close()
 
