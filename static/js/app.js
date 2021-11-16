@@ -146,7 +146,7 @@ function makeResponsive() {
     console.log(chosenYAxis);
 
     // Load data from data.csv
-    d3.json("assets/data/bond_girl.json").then(function (data) {
+    d3.json("/api/get_bond_girls").then(function (data) {
     
     // d3.csv("assets/data/bond_girls.csv").then(function (data) {
         // Print the data

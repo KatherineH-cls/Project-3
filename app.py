@@ -41,7 +41,7 @@ def home():
     return render_template("index.html")
 
 @app.route("/api/get_bond_girls")
-def home():
+def girl_bond():
 
     #extract the sql table and turn it into a dataframe
     session=Session(engine)
