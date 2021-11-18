@@ -41,6 +41,18 @@ def girl_bond():
     # # Return template and data
     return (bond_girl_json)
 
+@app.route("/api/get_bond_votes")
+def bond_vote():
+
+    #extract the sql table and turn it into a dataframe
+    session=Session(engine)
+    bond_votes=pd.read_sql_table("bond_girl_data_cleaned_v3", conn)
+    # bond_girl_json = bond_girl.to_json(orient = "records")
+    session.close()
+
+    # # Return template and data
+    return (bond_votes)
+
 if __name__ == "__main__":
     app.run(debug=True)
 
