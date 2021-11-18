@@ -1,4 +1,33 @@
 // @TODO: YOUR CODE HERE!
+
+var girl_data={};
+
+// Load data from data.csv
+d3.json("/api/get_bond_girls").then(function (data) {
+    
+     
+    console.log(data);
+
+    // Step 1: Parse Data/Cast as numbers
+    // ==============================
+    data.forEach(function (data) {
+        data.actress_age = +data.actress_age;
+        data.bond_actor_age = +data.bond_actor_age;
+        data.year = +data.year;
+        data.actress = data.actress;
+        data.actor = data.actor;
+        data.average_girl_age = +data.average_girl_age;
+        data.difference = +data.difference;
+        data.diff_avg = +data.diff_avg;
+    });
+
+girl_data = data;
+
+
+
+}).catch(function (error) {
+    console.log(error)});
+
 function makeResponsive() {
 
     // if the SVG area isn't empty when the browser loads,
@@ -84,16 +113,16 @@ function makeResponsive() {
 
 
 
-        circlesGroup.on("mouseover", function (data) {
-            toolTip.show(data);
+        circlesGroup.on("mouseover", function (girl_data) {
+            toolTip.show(girl_data);
             // mouseover;
             d3.select(this)
                 .transition()
                 .duration(300);
         })
             // onmouseout event
-            .on("mouseout", function (data) {
-                toolTip.hide(data);
+            .on("mouseout", function (girl_data) {
+                toolTip.hide(girl_data);
                 d3.select(this)
                     .transition()
                     .duration(300)
@@ -124,11 +153,11 @@ function makeResponsive() {
         bondGroup.call(bondTip);
 
         bondGroup
-            .on("mouseover", function (data) {
-                bondTip.show(data);
+            .on("mouseover", function (girl_data) {
+                bondTip.show(girl_data);
             })
-            .on("mouseout", function (data) {
-                bondTip.hide(data);
+            .on("mouseout", function (girl_data) {
+                bondTip.hide(girl_data);
             });
 
         return bondGroup;
@@ -140,26 +169,9 @@ function makeResponsive() {
     // Initial Params
     var chosenXAxis = "year";
     var chosenYAxis = "actress_age";
-    console.log(chosenYAxis);
+    // console.log(chosenYAxis);
 
-    // Load data from data.csv
-    d3.json("/api/get_bond_girls").then(function (data) {
     
-     
-        console.log(data);
-
-        // Step 1: Parse Data/Cast as numbers
-        // ==============================
-        data.forEach(function (data) {
-            data.actress_age = +data.actress_age;
-            data.bond_actor_age = +data.bond_actor_age;
-            data.year = +data.year;
-            data.actress = data.actress;
-            data.actor = data.actor;
-            data.average_girl_age = +data.average_girl_age;
-            data.difference = +data.difference;
-            data.diff_avg = +data.diff_avg;
-        });
 
         
 
@@ -257,7 +269,7 @@ function makeResponsive() {
         //add box for 25 percentile to 75 percentile
         // ==============================
         chartGroup.selectAll(".IQR")
-            .data(data)
+            .data(girl_data)
             .enter()
             .append("rect")
             .attr('x', 0)
@@ -283,7 +295,7 @@ function makeResponsive() {
         // ==============================
         // consolgit pulle.log(chosenYAxis);
         var circlesGroup = chartGroup.selectAll("girls")
-            .data(data)
+            .data(girl_data)
             .enter()
             .append("circle")
             .attr("class", "girls")
@@ -309,7 +321,7 @@ function makeResponsive() {
                 "#0073ff"])
 
         var bondGroup = chartGroup.selectAll("bond")
-            .data(data)
+            .data(girl_data)
             .enter()
             .append("circle")
             .attr("value", function (d) {
@@ -338,7 +350,7 @@ function makeResponsive() {
                 console.log(bond);
                 // return colour to greyed circles
                 d3.selectAll(".bond")
-                    .data(data)
+                    .data(girl_data)
                     .filter(function (d) { return d.actor === bond })
                     .transition()
                     .duration(200)
@@ -346,7 +358,7 @@ function makeResponsive() {
                     ;
                 // highlight;
                 d3.selectAll(".bond")
-                    .data(data)
+                    .data(girl_data)
                     .filter(function (d) { return d.actor !== bond })
                     .transition()
                     .duration(200)
@@ -357,7 +369,7 @@ function makeResponsive() {
         chartGroup.selectAll(".girls")
             .on("click", function () {
                 d3.selectAll(".bond")
-                    .data(data)
+                    .data(girl_data)
                     .transition()
                     .duration(200)
                     .style("fill", function (d) { return color(d.actor) })
@@ -400,15 +412,13 @@ function makeResponsive() {
                 }
             });
 
-    }).catch(function (error) {
-        console.log(error);
-    });
+    ;
 
-}
+
 
 makeResponsive();
 
 // Event listener for window resize.
 // When the browser window is resized, makeResponsive() is called.
 d3.select(window).on("resize", makeResponsive);
-
+        };
