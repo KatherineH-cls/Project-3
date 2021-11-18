@@ -1,3 +1,18 @@
+#section1 {
+  background: url(../Actors/UltBond.jpg);
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+#section2 {
+  background: url(../Actors/bondstats.jpg);
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+#section3 {
+  background: url(../Actors/BondGirlG.jpg);
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
 #section4 {
   background: url(../Actors/007.jpg);
   background-repeat: no-repeat;
