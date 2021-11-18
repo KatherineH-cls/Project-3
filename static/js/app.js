@@ -2,6 +2,8 @@
 
 var girl_data = {};
 
+console.log("the top");
+
 // Load data from data.csv
 d3.json("/api/get_bond_girls").then(function (data) {
 
