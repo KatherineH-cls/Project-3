@@ -76,8 +76,6 @@ function makeResponsive() {
                     tipText = `<strong>${d.actor}</strong>
                     <br>Age difference: ${d.diff_avg} years`;
                 }
-                console.log("inside tool tip");
-                console.log(d.year);
                 return tipText;
             });
 
@@ -89,7 +87,6 @@ function makeResponsive() {
         circlesGroup.on("mouseover", function (data) {
             toolTip.show(data);
             // mouseover;
-            console.log("mouseover");
             d3.select(this)
                 .transition()
                 .duration(300);
@@ -148,13 +145,8 @@ function makeResponsive() {
     // Load data from data.csv
     d3.json("/api/get_bond_girls").then(function (data) {
     
-    // d3.csv("assets/data/bond_girls.csv").then(function (data) {
-        // Print the data
-        // if (error) throw error;
-        
+     
         console.log(data);
-
-        console.log("got past error")
 
         // Step 1: Parse Data/Cast as numbers
         // ==============================
@@ -169,17 +161,7 @@ function makeResponsive() {
             data.diff_avg = +data.diff_avg;
         });
 
-        // data.forEach(function (data) {
-        //     data.actress_age = +data.actress_age;
-        //     data.bond_actor_age = +data.bond_actor_age;
-        //     data.year = +data.film_release_year;
-        //     data.actress = data.bond_actress;
-        //     data.actor = data.bond_actor;
-        //     data.average_girl_age = +data.average_bond_girl_age;
-        //     data.difference = +data.difference;
-        //     data.diff_avg = +data.diff_avg;
-        // });
-
+        
 
         // Step 2: Create scale functions
         // ==============================
@@ -193,9 +175,7 @@ function makeResponsive() {
             .domain([0, 70])
             .range([chartHeight, 0]);
 
-        console.log(yScale(70 - 33));
-
-
+        
         // Step 3: Create axis functions
         // ==============================
         var bottomAxis = d3.axisBottom(xScale).tickFormat(d3.format(""));
@@ -227,8 +207,6 @@ function makeResponsive() {
             .style("fill", "black")
             .style("font-weight", "lighter")
             .text("Film Release Year");
-
-        console.log("added x label");
 
         // Add yaxis labels to the chart
         // ==============================
@@ -303,8 +281,7 @@ function makeResponsive() {
 
         // Step 5: Create Circles
         // ==============================
-        console.log(chosenXAxis);
-        console.log(chosenYAxis);
+        // consolgit pulle.log(chosenYAxis);
         var circlesGroup = chartGroup.selectAll("girls")
             .data(data)
             .enter()
@@ -379,7 +356,6 @@ function makeResponsive() {
 // return colour to greyed circles when girls are clicked
         chartGroup.selectAll(".girls")
             .on("click", function () {
-                console.log("click girls");
                 d3.selectAll(".bond")
                     .data(data)
                     .transition()
@@ -393,27 +369,19 @@ function makeResponsive() {
             .on("click", function () {
                 // get value of selection
                 var value = d3.select(this).attr("value");
-                console.log(value);
                 if (value !== chosenYAxis && value !== "bond_actor_age") {
                     // replaces chosenYAxis with value
                     chosenYAxis = value;
-                    console.log(chosenYAxis);
-                    // updates circles with new x, y values
+                     // updates circles with new x, y values
                     circlesGroup = renderCircles(circlesGroup,
                         xScale, chosenXAxis,
                         yScale, chosenYAxis);
-                    // circlesText = renderText(circlesText,
-                    //     xScale, chosenXAxis,
-                    //     yScale, chosenYAxis);
-                    // updates tooltips with new info
+                                        // updates tooltips with new info
                     circlesGroup = updateToolTip(chosenYAxis, circlesGroup);
 
                     // changes classes to change bold text
 
                     if (chosenYAxis === "actress_age") {
-                        // bond_ageLabel
-                        //     .classed("active", false)
-                        //     .classed("inactive", true);
                         actress_ageLabel
                             .classed("active", true)
                             .classed("inactive", false);
@@ -422,9 +390,6 @@ function makeResponsive() {
                             .classed("inactive", true);
                     }
                     else if (chosenYAxis === "average_girl_age") {
-                        // bond_ageLabel
-                        //     .classed("active", false)
-                        //     .classed("inactive", true);
                         actress_ageLabel
                             .classed("active", false)
                             .classed("inactive", true);
