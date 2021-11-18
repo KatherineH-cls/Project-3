@@ -10,12 +10,12 @@ d3.json("/api/get_bond_girls").then(function (data) {
 
     console.log(data);
 
-    console.log("why");
+    // console.log("why");
 
     // Step 1: Parse Data/Cast as numbers
     // ==============================
     data.forEach(function (data) {
-        console.log("inside");
+        // console.log("inside");
         data.actress_age = +data.actress_age;
         data.bond_actor_age = +data.bond_actor_age;
         data.year = +data.year;
@@ -24,14 +24,14 @@ d3.json("/api/get_bond_girls").then(function (data) {
         data.average_girl_age = +data.average_girl_age;
         data.difference = +data.difference;
         data.diff_avg = +data.diff_avg;
-        console.log(data.difference);
+        // console.log(data.difference);
     });
 
-    console.log("fetched data");
+    // console.log("fetched data");
 
     girl_data = data;
 
-    console.log("girl_data");
+    console.log(girl_data);
 
 
 
