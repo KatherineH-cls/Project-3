@@ -1,4 +1,8 @@
-
+#section4 {
+  background: url(../Actors/007.jpg);
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
 
 /* Carousel */
 body{
