@@ -1,8 +1,8 @@
 // @TODO: YOUR CODE HERE!
 
-var girl_data = {};
+// var girl_data = {};
 
-console.log("the top");
+// console.log("the top");
 
 // Load data from data.csv
 d3.json("/api/get_bond_girls").then(function (data) {
@@ -31,7 +31,7 @@ d3.json("/api/get_bond_girls").then(function (data) {
 
     girl_data = data;
 
-    console.log(girl_data);
+    makeResponsive();
 
 
 
@@ -41,7 +41,8 @@ d3.json("/api/get_bond_girls").then(function (data) {
 });
 
 function makeResponsive() {
-    console.log("ran function");
+    // console.log("ran function");
+    // console.log(girl_data);
 
     // if the SVG area isn't empty when the browser loads,
     // remove it and replace it with a resized version of the chart
@@ -77,7 +78,7 @@ function makeResponsive() {
     var chartGroup = svg.append("g")
         .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
-    console.log("got to here");
+    // console.log("got to here");
 
     // Functions for Interactivity
     // ==============================
@@ -99,6 +100,7 @@ function makeResponsive() {
 
     // function used for updating circles group with new tooltip
     function updateToolTip(chosenYAxis, circlesGroup) {
+        // console.log(chosenYAxis);
         var toolTip = d3.tip()
             .offset([-10, -60])
             .style("background-color", "white")
@@ -307,7 +309,8 @@ function makeResponsive() {
     // Step 5: Create Circles
     // ==============================
     // consolgit pulle.log(chosenYAxis);
-    var circlesGroup = chartGroup.selectAll("girls")
+    // console.log(girl_data);
+    var circlesGroup = chartGroup.selectAll(".girls")
         .data(girl_data)
         .enter()
         .append("circle")
@@ -333,7 +336,7 @@ function makeResponsive() {
             "#0064d8",
             "#0073ff"])
 
-    var bondGroup = chartGroup.selectAll("bond")
+    var bondGroup = chartGroup.selectAll(".bond")
         .data(girl_data)
         .enter()
         .append("circle")
@@ -429,7 +432,7 @@ function makeResponsive() {
 
     }
 
-    makeResponsive();
+    // makeResponsive(girl_data);
 
     // Event listener for window resize.
     // When the browser window is resized, makeResponsive() is called.
