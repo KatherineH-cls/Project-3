@@ -1,4 +1,8 @@
-/* Main html adjustments */
+#section4 {
+  background: url(../Actors/007.jpg);
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
 
 /* Carousel */
 body{
@@ -97,7 +101,32 @@ body{
 }
 
 /* Poll */
+ul {
+  display: inline-block;
+}
+form {
+  display: inline-block;
+}
+.poll {
+  display: inline-block;
+}
+.poll-body {
+  display: inline;
+}
+li {
+  width: 150px;
+  align-content: center;
+}
 
+
+.secDiv {
+  width: 140px;
+  text-align: justify;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
   #chart {
     background-color: white;
   }
@@ -130,11 +159,14 @@ body{
     list-style-type: none;
     border: 1px solid #ccc;
     border-radius: 0.5rem;
+    display:inline-flex;
+    align-content: center;
   }
   .poll-body li label {
-    display: block;
+    display: inline-block;
     width: 80%;
     padding: 0.5rem;
+    align-items: center;
   }
   .poll-body li label:hover {
     background-color: #eee;
