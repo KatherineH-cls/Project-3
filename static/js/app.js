@@ -36,9 +36,9 @@ d3.json("/api/get_bond_girls").then(function (data) {
 
 
 })
-.catch(function (error) {
-    console.log(error)
-});
+    .catch(function (error) {
+        console.log(error)
+    });
 
 function makeResponsive() {
     // console.log("ran function");
@@ -73,6 +73,11 @@ function makeResponsive() {
         .append("svg")
         .attr("width", svgWidth)
         .attr("height", svgHeight)
+        ;
+
+    svg.append("rect")
+        .attr("width", "100%")
+        .attr("height", "100%")
         .attr("fill", "white");
 
     // Append a group area, then set its margins
@@ -429,13 +434,13 @@ function makeResponsive() {
             }
         });
 
-    
 
-    }
 
-    // makeResponsive(girl_data);
+}
 
-    // Event listener for window resize.
-    // When the browser window is resized, makeResponsive() is called.
-    d3.select(window).on("resize", makeResponsive);
+// makeResponsive(girl_data);
+
+// Event listener for window resize.
+// When the browser window is resized, makeResponsive() is called.
+d3.select(window).on("resize", makeResponsive);
 
