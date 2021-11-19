@@ -72,7 +72,8 @@ function makeResponsive() {
     var svg = d3.select("#scatter")
         .append("svg")
         .attr("width", svgWidth)
-        .attr("height", svgHeight);
+        .attr("height", svgHeight)
+        .attr("fill", "white");
 
     // Append a group area, then set its margins
     var chartGroup = svg.append("g")
