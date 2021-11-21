@@ -1,21 +1,13 @@
 // @TODO: YOUR CODE HERE!
 
-// var girl_data = {};
-
-// console.log("the top");
-
 // Load data from data.csv
 d3.json("/api/get_bond_girls").then(function (data) {
 
-
     console.log(data);
-
-    // console.log("why");
 
     // Step 1: Parse Data/Cast as numbers
     // ==============================
     data.forEach(function (data) {
-        // console.log("inside");
         data.actress_age = +data.actress_age;
         data.bond_actor_age = +data.bond_actor_age;
         data.year = +data.year;
@@ -24,16 +16,11 @@ d3.json("/api/get_bond_girls").then(function (data) {
         data.average_girl_age = +data.average_girl_age;
         data.difference = +data.difference;
         data.diff_avg = +data.diff_avg;
-        // console.log(data.difference);
     });
-
-    // console.log("fetched data");
 
     girl_data = data;
 
     makeResponsive();
-
-
 
 })
     .catch(function (error) {
@@ -41,9 +28,6 @@ d3.json("/api/get_bond_girls").then(function (data) {
     });
 
 function makeResponsive() {
-    // console.log("ran function");
-    // console.log(girl_data);
-
     // if the SVG area isn't empty when the browser loads,
     // remove it and replace it with a resized version of the chart
     var svgArea = d3.select("body").select("svg");
@@ -84,8 +68,6 @@ function makeResponsive() {
     var chartGroup = svg.append("g")
         .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
-    // console.log("got to here");
-
     // Functions for Interactivity
     // ==============================
 
@@ -99,7 +81,6 @@ function makeResponsive() {
             .duration(1000)
             .attr("cx", d => xScale(d[chosenXAxis]))
             .attr("cy", d => yScale(d[chosenYAxis]));
-
         return circlesGroup;
     }
 
@@ -131,8 +112,6 @@ function makeResponsive() {
 
 
         circlesGroup.call(toolTip);
-
-
 
         circlesGroup.on("mouseover", function (girl_data) {
             toolTip.show(girl_data);
@@ -191,10 +170,6 @@ function makeResponsive() {
     var chosenXAxis = "year";
     var chosenYAxis = "actress_age";
     // console.log(chosenYAxis);
-
-
-
-
 
     // Step 2: Create scale functions
     // ==============================
@@ -314,8 +289,7 @@ function makeResponsive() {
 
     // Step 5: Create Circles
     // ==============================
-    // consolgit pulle.log(chosenYAxis);
-    // console.log(girl_data);
+    // console.log(chosenYAxis);
     var circlesGroup = chartGroup.selectAll(".girls")
         .data(girl_data)
         .enter()
