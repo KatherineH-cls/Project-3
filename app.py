@@ -15,6 +15,10 @@ endpoint = os.getenv('db_endpoint')
 username = os.getenv('db_username')
 password = os.getenv('db_password')
 
+# endpoint= 'james-bond-uwa-db.cbbzivxykkl5.ap-southeast-2.rds.amazonaws.com'
+# username='postgres'
+# password='postgres'
+
 engine = create_engine(f'postgresql://{username}:{password}@{endpoint}:5432/James_Bond')
 conn = engine.connect()
 
@@ -41,42 +45,42 @@ def girl_bond():
     # # Return template and data
     return (bond_girl_json)
 
-@app.route("/api/get_bond_votes")
-def bond_vote():
+# @app.route("/api/get_bond_votes")
+# def bond_vote():
 
-    #extract the sql table and turn it into a dataframe
-    session=Session(engine)
-    bond_votes=pd.read_sql_table("bond_girl_data_cleaned_v3", conn)
-    # bond_girl_json = bond_girl.to_json(orient = "records")
-    session.close()
+#     #extract the sql table and turn it into a dataframe
+#     session=Session(engine)
+#     bond_votes=pd.read_sql_table("bond_votes", conn)
+#     # bond_girl_json = bond_girl.to_json(orient = "records")
+#     session.close()
 
-    # # Return template and data
-    return (bond_votes)
+#     # # Return template and data
+#     return (bond_votes)
 
 
-from flask_sqlalchemy import SQLAlchemy
-from models import create_classes
+# from flask_sqlalchemy import SQLAlchemy
+# from models import create_classes
 
-db = SQLAlchemy(app)
+# db = SQLAlchemy(app)
 
-Vote = create_classes(db)
+# Vote = create_classes(db)
 
-@app.route("/send", methods=["GET", "POST"])
-def send():
-    if request.method == "POST":
-        name = request.form["pollOptions"]
+# @app.route("/send", methods=["GET", "POST"])
+# def send():
+#     if request.method == "POST":
+#         name = request.form["pollOptions"]
 
-        vote = Vote(name=name)
-        db.session.add(vote)
-        db.session.commit()
+#         vote = Vote(name=name)
+#         db.session.add(vote)
+#         db.session.commit()
     
-    return render_template("index2.html")
+#     return render_template("index2.html")
 
-@app.route("/api/nextbond")
-def nextbond():
-    results = db.session.query(Vote.vote).all()
+# @app.route("/api/nextbond")
+# def nextbond():
+#     results = db.session.query(Vote.vote).all()
 
-    return jsonify(vote_data)
+#     return jsonify(vote_data)
 
 if __name__ == "__main__":
     app.run(debug=True)

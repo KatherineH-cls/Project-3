@@ -66,3 +66,8 @@ CREATE TABLE country_revenue (
 	gross_adj_2020 FLOAT,
 	movie text
 	);
+
+CREATE TABLE bond_votes (
+	option TEXT,
+	votes INT
+	);
