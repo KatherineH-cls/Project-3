@@ -53,6 +53,10 @@ def bond_vote():
     # # Return template and data
     return (bond_votes)
 
+
+from flask_sqlalchemy import SQLAlchemy
+from models import create_classes
+
 db = SQLAlchemy(app)
 
 Vote = create_classes(db)
