@@ -1,3 +1,9 @@
+.images {
+  padding-left: 25px;
+}
+.images img {
+  padding-left: 15px;
+}
 #section1 {
   background: url(../Actors/UltBond.jpg);
   background-repeat: no-repeat;
@@ -129,7 +135,7 @@ form {
   display: inline;
 }
 li {
-  width: 150px;
+  width: 200px;
   align-content: center;
 }
 
@@ -167,7 +173,7 @@ li {
     border-image: linear-gradient(to right, transparent, rgb(194, 177, 23), transparent) 1;
   }
   .poll-body {
-    height: 50%;
+    height: 60%;
     padding: 1rem;
   }
   .poll-body ul {

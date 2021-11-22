@@ -53,7 +53,26 @@ def bond_vote():
     # # Return template and data
     return (bond_votes)
 
+db = SQLAlchemy(app)
+
+Vote = create_classes(db)
+
+@app.route("/send", methods=["GET", "POST"])
+def send():
+    if request.method == "POST":
+        name = request.form["pollOptions"]
+
+        vote = Vote(name=name)
+        db.session.add(vote)
+        db.session.commit()
+    
+    return render_template("index2.html")
+
+@app.route("/api/nextbond")
+def nextbond():
+    results = db.session.query(Vote.vote).all()
+
+    return jsonify(vote_data)
+
 if __name__ == "__main__":
     app.run(debug=True)
-
-

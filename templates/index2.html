@@ -334,60 +334,25 @@
       <div class="container">
       <!-- Poll -->
 
-        <!-- <div class="chart-container" style="align-content: center; margin-top: 50px; height: 300px; width: 600px;"> -->
-        <!-- <canvas id="chart"></canvas> <canvas id="chart" width="300" height="150"></canvas> -->
-          </div>
-            <form id="pollForm">
-              <div class="poll" style="background-color: white; width: 1120px; height: 80%;">
-                <div class="poll-heading" style="width: 1120px;">
-                  <h3 class="poll-title" style="text-align: center;">Vote for the next James Bond Actor</h3>
-                </div>
-                <div class="poll-body">
-                  <ul style="width:max-content;">
-                    <li>
-                      <div class='secDiv'><img src="{{url_for('static', filename='Actors/RichardMadden.jpg')}}"style="height: 200px;"/>
-                      <label><input type="radio" name="pollOptions" value="Richard Madden"><br/><span>Richard Madden</span></label>
-                      </div>
-                    </li>
-                    <li>
-                      <div class='secDiv'><img src="{{url_for('static', filename='Actors/TomHardy.jpg')}}"style="height: 200px;"/>
-                      <label><input type="radio" name="pollOptions" value="Tom Hardy"><br/><span>Tom Hardy</span></label>
-                      </div>
-                    </li>
-                    <li>
-                      <div class='secDiv'><img src="{{url_for('static', filename='Actors/LashanaLynch.jpg')}}"style="height: 200px;"/>
-                      <label><input type="radio" name="pollOptions" value="Lashana Lynch"><br/><span>Lashana Lynch</span></label>
-                      </div>
-                    </li>
-                    <li>
-                      <div class='secDiv'><img src="{{url_for('static', filename='Actors/HenryCavill.jpeg')}}"style="height: 200px;"/>
-                      <label><input type="radio" name="pollOptions" value="Henry Cavill"><br/><span>Henry Cavill</span></label>
-                      </div>
-                    </li>
-                    <li>
-                      <div class='secDiv'><img src="{{url_for('static', filename='Actors/Rege.jpg')}}"style="height: 200px;"/>
-                      <label><input type="radio" name="pollOptions" value="Regé-Jean Page"><br/><span>Regé-Jean Page</span></label>
-                      </div>
-                    </li>
-                    <li>
-                      <div class='secDiv'><img src="{{url_for('static', filename='Actors/JamesNorton.jpeg')}}"style="height: 200px;"/>
-                      <label><input type="radio" name="pollOptions" value="James Norton"><br/><span>James Norton</span></label>
-                      </div>
-                    </li>
-                    <li>
-                      <div class='secDiv'><img src="{{url_for('static', filename='Actors/IdrisElba.jpg')}}"style="height: 200px;"/>
-                      <label><input type="radio" name="pollOptions" value="Idris Elba"><br/><span>Idris Elba</span></label>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-                <div class="poll-footer">
-                  <button type="submit">Vote</button>
-                </div>
-              </div>
-          </form>
-        </div>
-        </div>
+        <!-- Poll -->
+
+        <div class="chart-container" style="align-content: center; margin-top: 50px; height: 600px; width: 1100px;">
+          <canvas id="chart"></canvas> <!-- <canvas id="chart" width="300" height="150"></canvas> -->
+          <label>
+            <div class='images' style="align-content: center; width: 1100px;">
+              <img src="../static/Actors/RichardMadden.jpg"style="height: 200px;"/>
+              <img src="../static/Actors/TomHardy.jpeg"style="height: 200px;"/>
+              <img src="../static/Actors/LashanaLynch.jpg"style="height: 200px;"/>
+              <img src="../static/Actors/HenryCavill.jpeg"style="height: 200px;"/>
+              <img src="../static/Actors/Rege.jpg"style="height: 200px;"/>
+              <img src="../static/Actors/JamesNorton.jpeg"style="height: 200px;"/>
+              <img src="../static/Actors/IdrisElba.jpg"style="height: 200px;"/>
+          </label>
+            </div>
+              <form id="pollForm">
+                
+                </div> 
+            </form>
   </div>
 
   <!-- Footer-->
