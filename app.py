@@ -11,15 +11,16 @@ from sqlalchemy import create_engine, func
 #################################################
 #establish connection to SQL database in AWS - refer to https://stackoverflow.com/questions/54300263/connect-to-aws-rds-postgres-database-with-python/54313925
 
-endpoint = os.getenv('db_endpoint')
-username = os.getenv('db_username')
-password = os.getenv('db_password')
+# endpoint = os.getenv('db_endpoint')
+# username = os.getenv('db_username')
+# password = os.getenv('db_password')
 
-# endpoint= 'james-bond-uwa-db.cbbzivxykkl5.ap-southeast-2.rds.amazonaws.com'
-# username='postgres'
-# password='postgres'
+endpoint= 'james-bond-uwa-db.cbbzivxykkl5.ap-southeast-2.rds.amazonaws.com'
+username='postgres'
+password='postgres'
 
-engine = create_engine(f'postgresql://{username}:{password}@{endpoint}:5432/James_Bond')
+engine = create
+_engine(f'postgresql://{username}:{password}@{endpoint}:5432/James_Bond')
 conn = engine.connect()
 
 # Create an instance of Flask
