@@ -4,6 +4,11 @@
 .images img {
   padding-left: 15px;
 }
+#section0 {
+  background: url(../Movie_Images/bondgroup.jpg);
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
 #section1 {
   background: url(../Actors/UltBond.jpg);
   background-repeat: no-repeat;
