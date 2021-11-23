@@ -4,6 +4,8 @@ import pandas as pd
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
 from sqlalchemy import create_engine, func
+from sqlalchemy import Column, Integer, String, Float
+from sqlalchemy.ext.declarative import declarative_base
 
 
 #################################################
@@ -15,16 +17,24 @@ endpoint = os.getenv('db_endpoint')
 username = os.getenv('db_username')
 password = os.getenv('db_password')
 
-# endpoint= 'james-bond-uwa-db.cbbzivxykkl5.ap-southeast-2.rds.amazonaws.com'
-# username='postgres'
-# password='postgres'
-
 engine = create_engine(f'postgresql://{username}:{password}@{endpoint}:5432/James_Bond')
 conn = engine.connect()
 
 # Create an instance of Flask
 app = Flask(__name__)
 
+################################
+# set up a declarative base to allow bond_voting javascript to connect to 
+Base = declarative_base()
+
+class Bond_vote_db(Base):
+    __tablename__ = 'bond_votes'
+    __table_args__ = {'extend_existing': True}
+    option = Column(String, primary_key=True)
+    votes = Column(Integer)
+    color = Column(String)
+
+#####################################
 
 # Route to render index.html template using data 
 @app.route("/")
@@ -32,6 +42,12 @@ def home():
 
         # # Return template and data
     return render_template("index.html")
+
+@app.route("/voting_chart")
+def vote_bond():
+
+        # # Return template and data
+    return render_template("index2.html")
 
 @app.route("/api/get_bond_girls")
 def girl_bond():
@@ -45,42 +61,102 @@ def girl_bond():
     # # Return template and data
     return (bond_girl_json)
 
+#####################################
+# set up api point to allow reading into AWS databse which can then be read by javascript
+@app.route("/api/get_bond_votes")
+def get_vote_data():
+
+    #extract the sql table and turn it into a dataframe
+    session=Session(engine)
+    bond_votes=pd.read_sql_table("bond_votes", conn)
+    bond_votes_dict=bond_votes.to_dict(orient="record")
+    session.close()
+
+    # # Return template and data
+    return jsonify(bond_votes_dict)
+
+
 # @app.route("/api/get_bond_votes")
 # def bond_vote():
 
 #     #extract the sql table and turn it into a dataframe
 #     session=Session(engine)
 #     bond_votes=pd.read_sql_table("bond_votes", conn)
-#     # bond_girl_json = bond_girl.to_json(orient = "records")
+#     bond_votes_dict=bond_votes.to_dict(orient="record")
 #     session.close()
 
 #     # # Return template and data
-#     return (bond_votes)
+#     return jsonify(bond_votes_dict)
 
+####################################
+# set up 7 different endpoints to allow voting button to update bond_votes database
 
-# from flask_sqlalchemy import SQLAlchemy
-# from models import create_classes
+@app.route("/Idris Elba")
+def tes():
+    session=Session(engine)
+    bond_votes=session.query(Bond_vote_db).filter_by(option="Idris Elba").first()
+    bond_votes.votes+=1
+    session.commit()
+    session.close()
 
-# db = SQLAlchemy(app)
+    return redirect('/voting_chart')
 
-# Vote = create_classes(db)
+@app.route("/James Norton")
+def James_Norton():
+    session=Session(engine)
+    bond_votes=session.query(Bond_vote_db).filter_by(option="James Norton").first()
+    bond_votes.votes+=1
+    session.commit()
+    session.close()
 
-# @app.route("/send", methods=["GET", "POST"])
-# def send():
-#     if request.method == "POST":
-#         name = request.form["pollOptions"]
+    return redirect('/voting_chart')
 
-#         vote = Vote(name=name)
-#         db.session.add(vote)
-#         db.session.commit()
-    
-#     return render_template("index2.html")
+@app.route("/Regé-Jean Page")
+def Jean_Page():
+    session=Session(engine)
+    bond_votes=session.query(Bond_vote_db).filter_by(option="Regé-Jean Page").first()
+    bond_votes.votes+=1
+    session.commit()
+    session.close()
 
-# @app.route("/api/nextbond")
-# def nextbond():
-#     results = db.session.query(Vote.vote).all()
+    return redirect('/voting_chart')
 
-#     return jsonify(vote_data)
+@app.route("/Henry Cavill")
+def Henry_Cavill():
+    session=Session(engine)
+    bond_votes=session.query(Bond_vote_db).filter_by(option="Henry Cavill").first()
+    bond_votes.votes+=1
+    session.commit()
+    session.close()
 
-if __name__ == "__main__":
-    app.run(debug=True)
+    return redirect('/voting_chart')
+
+@app.route("/Lashana Lynch")
+def Lashana():
+    session=Session(engine)
+    bond_votes=session.query(Bond_vote_db).filter_by(option="Lashana Lynch").first()
+    bond_votes.votes+=1
+    session.commit()
+    session.close()
+
+    return redirect('/voting_chart')
+
+@app.route("/Tom Hardy")
+def Tom():
+    session=Session(engine)
+    bond_votes=session.query(Bond_vote_db).filter_by(option="Tom Hardy").first()
+    bond_votes.votes+=1
+    session.commit()
+    session.close()
+
+    return redirect('/voting_chart')
+
+@app.route("/Richard Madden")
+def Richard():
+    session=Session(engine)
+    bond_votes=session.query(Bond_vote_db).filter_by(option="Richard Madden").first()
+    bond_votes.votes+=1
+    session.commit()
+    session.close()
+
+    return redirect('/voting_chart')

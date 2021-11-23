@@ -71,3 +71,35 @@ CREATE TABLE bond_votes (
 	option TEXT,
 	votes INT
 	);
+
+-- This was done as we cannot import the rgb information directly via pgAdmin csv Import
+ALTER TABLE bond_votes
+ADD COLUMN color TEXT;
+
+UPDATE bond_votes
+SET color = 'rgb(255, 99, 132)'
+WHERE option='Richard Madden';
+
+UPDATE bond_votes
+SET color = 'rgb(54, 162, 235)'
+WHERE option='Tom Hardy';
+
+UPDATE bond_votes
+SET color = 'rgb(36, 36, 36)'
+WHERE option='Lashana Lynch';
+
+UPDATE bond_votes
+SET color = 'rgb(255, 159, 64)'
+WHERE option='Henry Cavill';
+
+UPDATE bond_votes
+SET color = 'rgb(75, 192, 192)'
+WHERE option='Regé-Jean Page';
+
+UPDATE bond_votes
+SET color = 'rgb(255, 206, 86)'
+WHERE option='James Norton';
+
+UPDATE bond_votes
+SET color = 'rgb(153, 102, 255)'
+WHERE option='Idris Elba';

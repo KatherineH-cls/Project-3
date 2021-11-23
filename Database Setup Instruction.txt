@@ -1,0 +1,25 @@
+Database Type: AWS RDS
+
+This note has been created to provide a guidance on setting up the AWS database required for the James Bond project. At the end of the project, the AWS RDS database has been deleted due to budget constraint.
+
+Data Cleaning Process:
+- James Bond Movie data and Bond Girl data were extracted from https://www.kaggle.com/dreb87/jamesbond and https://www.kaggle.com/travistyler/bond-girls-age-and-film-data respectively
+- James Bond Movie data csv is then updated via Excel with the newest bond film information "No Time to Die" which was taken from https://jamesbond.fandom.com/wiki/James_Bond_Wiki
+- Using Excel, 3 additional columns were added, being US Revenue adj 2020, Gross Revenue 2020, and Budget adj 2020. These columns reflect the adjusted value of each aspect of the movie, based on annual global inflation from 2014-2020 (refer to world_inflation_2004-2020.csv)
+- Bond Girl data cleaning process was undertaken directly via python
+
+Database Connection:
+- AWS RDS for PostgreSQL has been utilised in this project. All of its configuration has been kept as basic as possible to minimise cost
+- username and password has been kept generic as the database will eventually be deleted (hence, this instruction was created)
+- Once the above cleaning process is complete, connection to AWS RDS is established via PostgreSQL using the endpoint provided by AWS
+
+Creating Table in Database:
+Tables have been created using 2 methods:
+1. Using sql schema noted in james_bond_schema in notebook_files folder, with csv files being imported directly via PGadmin
+2. Using sql alchemy as outlined in 2 separate machine learning notebook file in notebook_files folder
+
+Updating Table in Database:
+Tables in the database have been updated using the following method:
+- SQL Query in PostgreSQL
+- SQLalchemy using connection established via declarative_base() - refer to app.py file
+
