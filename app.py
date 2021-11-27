@@ -16,8 +16,9 @@ from sqlalchemy.ext.declarative import declarative_base
 endpoint = os.getenv('db_endpoint')
 username = os.getenv('db_username')
 password = os.getenv('db_password')
+db_name = os.getenv('db_name')
 
-engine = create_engine(f'postgresql://{username}:{password}@{endpoint}:5432/James_Bond')
+engine = create_engine(f'postgresql://{username}:{password}@{endpoint}:5432/{db_name}')
 conn = engine.connect()
 
 # Create an instance of Flask
