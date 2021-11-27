@@ -16,7 +16,8 @@ from sqlalchemy.ext.declarative import declarative_base
 endpoint = os.getenv('db_endpoint')
 username = os.getenv('db_username')
 password = os.getenv('db_password')
-db_name = os.getenv('db_name')
+# db_name = os.getenv('db_name')
+db_name = 'd96d9lha0fnc67'
 
 engine = create_engine(f'postgresql://{username}:{password}@{endpoint}:5432/{db_name}')
 conn = engine.connect()
@@ -161,3 +162,6 @@ def Richard():
     session.close()
 
     return redirect('/voting_chart')
+
+if __name__ == "__main__":
+    app.run(debug=True)
